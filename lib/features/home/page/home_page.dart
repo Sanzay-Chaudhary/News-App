@@ -10,12 +10,12 @@ class MyHomePage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(
+          SizedBox(
             height: 250.0,
           ),
           //const SizedBox(height: 16),
 
-          const Text(
+          Text(
             "ANTUMN",
             style: TextStyle(
               color: Colors.green,
@@ -23,45 +23,45 @@ class MyHomePage extends StatelessWidget {
               fontSize: 50,
             ),
           ),
-          const Spacer(),
+
+          Spacer(),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              minimumSize: const Size(double.infinity, 40),
+              minimumSize: Size(double.infinity, 40),
             ),
             onPressed: () {
-              // Navigate to sign up page
+              Navigator.of(context).pushNamed("/login_page");
             },
-            child: const Text(
+            child: Text(
               'Sign up with Google',
               style: TextStyle(color: Colors.black),
             ),
           ),
-          const SizedBox(
+          SizedBox(
             height: 16,
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              minimumSize: const Size(double.infinity, 40),
+              minimumSize: Size(double.infinity, 40),
             ),
             onPressed: () {
               Navigator.of(context).pushNamed("/detail_page");
             },
-            child: const Text(
+            child: Text(
               'Login to my account',
               style: TextStyle(color: Colors.green),
             ),
           ),
-          const SizedBox(
+          SizedBox(
             height: 16.0,
           ),
-          const Text(
+          Text(
             "By creating account you accept terms of use and privacy policy",
             style: TextStyle(color: Colors.white),
           ),
-          const SizedBox(height: 13),
+          SizedBox(height: 13),
         ],
       ),
     );
   }
 }
-

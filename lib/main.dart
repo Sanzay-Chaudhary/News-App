@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/features/home/page/home_page.dart';
 import 'package:news_app/features/detail/page/detail_page.dart';
+import 'package:news_app/features/home/page/login_page.dart';
 import 'package:news_app/features/reading/page/enviroment_page.dart';
 
 void main() {
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         "/home_page": (BuildContext context) => const MyHomePage(),
         "/enviroment_page": (BuildContext context) => const EnviromentPage(),
         "/detail_page": (BuildContext context) => const DetailPage(),
+        "/login_page": (BuildContext context) => const LoginPage(),
       },
     );
   }
