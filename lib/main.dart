@@ -25,8 +25,12 @@ class MyApp extends StatelessWidget {
         "/detail_page": (BuildContext context) => const DetailPage(),
         "/home_page": (BuildContext context) => const MyHomePage(),
         "/enviroment_page": (BuildContext context) => const EnviromentPage(),
-        "/detail_page": (BuildContext context) => const DetailPage(),
-        "/login_page": (BuildContext context) => const LoginPage(),
+        // "/login_page": (BuildContext context) => const LoginPage(
+        //isLogin: true,
+        //),
+        // "/login_page": (BuildContext context) => const LoginPage(
+        //  isLogin: false,
+        //),
       },
     );
   }
