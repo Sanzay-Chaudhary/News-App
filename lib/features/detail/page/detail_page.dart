@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:news_app/features/detail/widgets/catergory_title.dart';
 import 'package:news_app/features/detail/widgets/down_category.dart';
+import 'package:news_app/features/profile/page/profile_page.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({super.key});
@@ -231,7 +232,10 @@ class _DetailPageState extends State<DetailPage> {
                 // onPressed for Saved item
                 break;
               case 3:
-                // onPressed for Profile item
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ProfilePage()));
                 break;
             }
           },

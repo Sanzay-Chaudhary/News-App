@@ -144,8 +144,8 @@ class _LoginPageState extends State<LoginPage> {
                                   ? Icons.remove_red_eye
                                   : Icons.remove_red_eye_outlined)),
                           hintText: "Password",
-                          border:
-                              OutlineInputBorder(borderSide: BorderSide.none)),
+                          border: const OutlineInputBorder(
+                              borderSide: BorderSide.none)),
                     ),
                   ],
                 ),
