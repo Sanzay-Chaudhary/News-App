@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -8,6 +10,27 @@ import 'package:news_app/features/home/page/login_page.dart';
 import 'package:news_app/features/enviroment/page/enviroment_page.dart';
 import 'package:image_picker/image_picker.dart';
 
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const ProfilePage(),
+    );
+  }
+}
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -16,6 +39,18 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  File? _image;
+  final ImagePicker _picker = ImagePicker();
+
+  void openImagePicker(ImageSource source) async {
+    final XFile? pickedImage = await _picker.pickImage(source: source);
+    if (pickedImage != null) {
+      _image = File(pickedImage.path);
+
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,13 +88,43 @@ class _ProfilePageState extends State<ProfilePage> {
                             backgroundColor:
                                 const Color.fromARGB(255, 219, 223, 226),
                             child: IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    builder: (context) => Container(
+                                      height: 100,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          ElevatedButton(
+                                              onPressed: () {
+                                                openImagePicker(
+                                                    ImageSource.gallery);
+                                              },
+                                              child:
+                                                  const Text("Open gallery")),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              openImagePicker(
+                                                  ImageSource.camera);
+                                            },
+                                            child: const Text("Open camera"),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
                                 icon: const Icon(
                                   Icons.edit,
                                   color: Colors.white,
                                 )),
                           ),
                         ),
+                        _image != null
+                            ? Image.file(_image!)
+                            : const Text("Please select an image"),
                       ],
                     ),
                     const Text(
@@ -131,7 +196,7 @@ class _ProfilePageState extends State<ProfilePage> {
               onPressed: () {},
             ),
             IconButton(
-              icon: const Icon(Icons.search),
+              icon: const Icon(Icons.call),
               onPressed: () {},
             ),
             IconButton(
