@@ -9,6 +9,7 @@ import 'package:news_app/features/detail/page/detail_page.dart';
 import 'package:news_app/features/home/page/login_page.dart';
 import 'package:news_app/features/enviroment/page/enviroment_page.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MyApp());
@@ -48,6 +49,13 @@ class _ProfilePageState extends State<ProfilePage> {
       _image = File(pickedImage.path);
 
       setState(() {});
+    }
+  }
+
+  final Uri _url = Uri.https("accounts.google.com");
+  Future<void> openUrl() async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
     }
   }
 
@@ -122,9 +130,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 )),
                           ),
                         ),
-                        _image != null
-                            ? Image.file(_image!)
-                            : const Text("Please select an image"),
+                        _image != null ? Image.file(_image!) : const Text(""),
                       ],
                     ),
                     const Text(
@@ -134,9 +140,14 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     TextButton(
                         onPressed: () {},
-                        child: const Text(
-                          "robertpattinson309@gmail.com",
-                          style: TextStyle(color: Colors.blue),
+                        child: TextButton(
+                          onPressed: () {
+                            openUrl();
+                          },
+                          child: const Text(
+                            "robertpattinson309@gmail.com",
+                            style: TextStyle(color: Colors.blue),
+                          ),
                         )),
                     const SizedBox(
                       height: 10,
@@ -196,7 +207,7 @@ class _ProfilePageState extends State<ProfilePage> {
               onPressed: () {},
             ),
             IconButton(
-              icon: const Icon(Icons.call),
+              icon: const Icon(Icons.search),
               onPressed: () {},
             ),
             IconButton(
