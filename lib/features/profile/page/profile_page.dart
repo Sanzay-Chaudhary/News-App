@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -10,6 +11,7 @@ import 'package:news_app/features/home/page/login_page.dart';
 import 'package:news_app/features/enviroment/page/enviroment_page.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(const MyApp());
@@ -59,9 +61,19 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
+  dynamic data = "";
+  @override
+  void initState() {
+    fetchData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Center(child: Text(data)),
+      ),
       body: Container(
         padding: const EdgeInsets.only(
           left: 20,
@@ -227,6 +239,20 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
     );
+  }
+
+  Future<void> fetchData() async {
+    final uri = Uri.parse("https://jsonplaceholder.typicode.com/albums/1");
+    final response = await http.get(uri);
+    if (response.statusCode == 200) {
+      final body = response.body;
+      final json = jsonDecode(body);
+      setState(() {
+        data = json['title'];
+      });
+    } else {
+      throw Exception("failded to load data");
+    }
   }
 }
 
