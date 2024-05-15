@@ -1,15 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
-import 'package:news_app/features/home/page/home_page.dart';
-import 'package:news_app/features/detail/page/detail_page.dart';
-import 'package:news_app/features/home/page/login_page.dart';
-import 'package:news_app/features/enviroment/page/enviroment_page.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:news_app/features/profile/util/information.dart';
+import 'package:news_app/features/profile/widgets/bot_nav_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 
@@ -20,7 +15,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -210,34 +204,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.home),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(Icons.bookmark),
-              onPressed: () {},
-            ),
-            Row(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.person),
-                  onPressed: () {},
-                ),
-                const Text("Profile"),
-              ],
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar: const BottomNavBar(),
     );
   }
 
@@ -250,22 +217,6 @@ class _ProfilePageState extends State<ProfilePage> {
       setState(() {
         data = json['title'];
       });
-    } else {
-      throw Exception("failded to load data");
     }
   }
-}
-
-Widget information(String text, IconData iconData) {
-  return Column(
-    children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(text),
-          IconButton(onPressed: () {}, icon: Icon(iconData)),
-        ],
-      )
-    ],
-  );
 }
