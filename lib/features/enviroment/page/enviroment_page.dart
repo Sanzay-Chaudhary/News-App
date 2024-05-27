@@ -1,12 +1,10 @@
 import 'package:esewa_flutter_sdk/esewa_config.dart';
-import 'package:esewa_flutter_sdk/esewa_payment.dart';
-import 'package:esewa_flutter_sdk/esewa_payment_success_result.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app/core/model/information_model.dart';
 import 'package:news_app/core/utils/dummy_constraint.dart';
-import 'package:esewa_flutter_sdk/esewa_flutter_sdk.dart';
 import 'package:news_app/features/enviroment/esewa_payment/esewa_payment.dart';
 import 'package:news_app/features/enviroment/model/categorylist.dart';
+import 'package:news_app/features/enviroment/viewModel/enviro_model.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const Home());
@@ -17,9 +15,12 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: EnviromentPage(),
+    return ChangeNotifierProvider(
+      create: (context) => EnvironmentProvider(),
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: EnviromentPage(),
+      ),
     );
   }
 }
@@ -97,6 +98,22 @@ class _EnviromentPageState extends State<EnviromentPage> {
               "Collapse of a mountain peak in Austria amid thawing permafrost triggers a huge rockfall",
               style:
                   TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            ),
+            Consumer<EnvironmentProvider>(
+              builder: (context, value, _) {
+                return Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        value.increment();
+                      },
+                      icon: const Icon(Icons.check),
+                      color: Colors.black,
+                    ),
+                    Text('Counter: ${value.counter}'),
+                  ],
+                );
+              },
             ),
             CategoryListTile(
               informationModel: _dummyData.informationList[0],
