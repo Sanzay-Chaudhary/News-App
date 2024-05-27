@@ -145,24 +145,29 @@ class _DetailPageState extends State<DetailPage> {
                     ),
                   ),
                 ),
-                const Positioned(
+                Positioned(
                   bottom: 10,
                   left: 10,
                   child: Row(
                     children: [
-                      CircleAvatar(
+                      const CircleAvatar(
                         radius: 15,
                         backgroundImage: NetworkImage(
                           "https://images.unsplash.com/photo-1688607933876-5ceae237a177?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fHw%3D",
                         ),
                       ),
-                      SizedBox(width: 5),
-                      Text(
+                      const SizedBox(width: 5),
+                      const Text(
                         "Carrot Alinyaa",
                         style: TextStyle(
                           color: Colors.white,
                         ),
                       ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.check),
+                        color: Colors.white,
+                      )
                     ],
                   ),
                 )

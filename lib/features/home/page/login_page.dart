@@ -32,7 +32,6 @@ class _LoginPageState extends State<LoginPage> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
-          physics: NeverScrollableScrollPhysics(),
           child: Center(
             child: Column(
               children: [

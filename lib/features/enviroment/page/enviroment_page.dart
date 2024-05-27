@@ -1,6 +1,28 @@
+import 'package:esewa_flutter_sdk/esewa_config.dart';
+import 'package:esewa_flutter_sdk/esewa_payment.dart';
+import 'package:esewa_flutter_sdk/esewa_payment_success_result.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/core/model/information_model.dart';
 import 'package:news_app/core/utils/dummy_constraint.dart';
+import 'package:esewa_flutter_sdk/esewa_flutter_sdk.dart';
+import 'package:news_app/features/enviroment/esewa_payment/esewa_payment.dart';
+import 'package:news_app/features/enviroment/model/categorylist.dart';
+
+void main() {
+  runApp(const Home());
+}
+
+class Home extends StatelessWidget {
+  const Home({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: EnviromentPage(),
+    );
+  }
+}
 
 class EnviromentPage extends StatefulWidget {
   const EnviromentPage({super.key});
@@ -11,6 +33,7 @@ class EnviromentPage extends StatefulWidget {
 
 class _EnviromentPageState extends State<EnviromentPage> {
   final DummyData _dummyData = DummyData();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,10 +52,13 @@ class _EnviromentPageState extends State<EnviromentPage> {
         ),
         centerTitle: true,
         actions: [
+          ElevatedButton(
+              onPressed: () => EsewaService().useEsewa(),
+              child: const Text("esewa")),
           IconButton(
               onPressed: () {},
               icon: const Icon(
-                Icons.menu_open,
+                Icons.menu,
                 color: Colors.black,
               )),
         ],
@@ -151,35 +177,6 @@ class _EnviromentPageState extends State<EnviromentPage> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class CategoryListTile extends StatelessWidget {
-  final InformationModel informationModel;
-  const CategoryListTile({
-    super.key,
-    required this.informationModel,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const Row(
-      children: [
-        CircleAvatar(
-          radius: 15,
-          backgroundImage: NetworkImage(
-            "https://images.unsplash.com/photo-1688607933876-5ceae237a177?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fHw%3D",
-          ),
-        ),
-        SizedBox(width: 5),
-        Text(
-          "Carrot Alinyaa",
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-      ],
     );
   }
 }
